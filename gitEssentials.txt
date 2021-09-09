@@ -1,0 +1,30 @@
+#  When you mess up the remote origin like setting up ssh intead of https for remote
+#  and having troubles pushing your code, you need to reset the remote origin.
+#  Here is the command that works.
+
+The original mistake was to use ssh endpoint instead of https:
+$ git remote add origin git@github.com:yourlogin/yourrepo.git
+
+This would typically result in below error while pushing the repo.
+
+$ git push -u origin main
+The authenticity of host 'github.com (140.82.112.4)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,140.82.112.4' (RSA) to the list of known hosts.
+Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+The solution for that is to remove the remote origin and reset it to https.
+Below commands should work now.
+
+$ git remote remove origin
+$ git remote add origin https://github.com/yourlogin/yourrepo.git
+$ git push -u origin main
+
+
+
